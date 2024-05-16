@@ -1,12 +1,13 @@
 import { UsersList } from "./copmonents/UsersList";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 function App() {
-  return (
-    <>
-      <h1>Hello, World!</h1>
-      <UsersList />
-    </>
-  );
+    return(
+        <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
+        </Switch>
+  	)
 }
 
 export default App;
