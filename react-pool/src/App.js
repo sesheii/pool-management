@@ -1,13 +1,18 @@
-import { UsersList } from "./copmonents/UsersList";
-import { Route, Switch, Redirect } from "react-router-dom";
+import React from 'react';
+import './App.css'; // якщо ви використовуєте CSS
+import NavBar from './copmonents/NavBar.jsx';
+
+import LoginForm from "./copmonents/LoginForm.jsx"; 
+
 
 function App() {
-    return(
-        <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={SignUp} />
-        </Switch>
-  	)
+  return (
+    <div className="App">
+      <header className="App-header">
+        <LoginForm />
+      </header>
+    </div>
+  );
 }
 
 export default App;
