@@ -18,6 +18,7 @@ class PoolUser(models.Model):
     age = models.IntegerField()
     role = models.CharField(max_length=50)
     subscription = models.OneToOneField(Subscription, on_delete=models.CASCADE, null=True, blank=True)
+    password = models.CharField(max_length=18)
 
 class Checkin(models.Model):
     user = models.ForeignKey(PoolUser, on_delete=models.CASCADE)

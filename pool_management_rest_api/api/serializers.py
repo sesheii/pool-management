@@ -18,7 +18,7 @@ class PoolUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PoolUser
-        fields = ['id', 'first_name', 'last_name', 'phone_number', 'age', 'role', 'subscription']
+        fields = ['id', 'first_name', 'last_name', 'phone_number', 'age', 'role', 'subscription', 'password']
 
 class CheckinSerializer(serializers.ModelSerializer):
     class Meta:
