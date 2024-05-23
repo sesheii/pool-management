@@ -14,11 +14,11 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         fields = ['id', 'subscription_type', 'start_date', 'end_date']
 
 class PoolUserSerializer(serializers.ModelSerializer):
-    subscription = SubscriptionSerializer()
+    subscription = SubscriptionSerializer(required=False)
 
     class Meta:
         model = PoolUser
-        fields = ['id', 'first_name', 'last_name', 'phone_number', 'age', 'role', 'subscription', 'password']
+        fields = ['id', 'first_name', 'last_name', 'email', 'age', 'role', 'subscription', 'password']
 
 class CheckinSerializer(serializers.ModelSerializer):
     class Meta:
