@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import re_path as url
-from api.views import PoolUserView, ValidateLogin, CreatePoolUser
+from api.views import PoolUserView, ValidateLogin, CreatePoolUser, PoolUserDetailByEmailView
 
 urlpatterns = [
   
@@ -25,4 +25,5 @@ urlpatterns = [
     path('users/', PoolUserView.as_view(), name='users_list'),
     path('validate-login/', ValidateLogin.as_view(), name='validate_login'),
     path('create-pool-user/', CreatePoolUser.as_view(), name='create_pool_user'),
+    path('users/<str:email>/', PoolUserDetailByEmailView.as_view(), name='pooluser-detail-by-email'),
 ]

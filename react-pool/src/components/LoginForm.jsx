@@ -29,8 +29,9 @@ const LoginForm = () => {
 
       if (response.status === 200) {
         console.log(response.data.message);
-        Cookies.set('email', email, { expires: 7 })
-        Cookies.set('password', password, { expires: 7 })
+        localStorage.setItem('email', email);
+        localStorage.setItem('password', password);
+
         navigate('/success');
       }
       else {

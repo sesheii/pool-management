@@ -53,3 +53,23 @@ class CreatePoolUser(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import PoolUser
+from .serializers import PoolUserSerializer
+
+class PoolUserDetailByEmailView(APIView):
+    def get(self, request, email):
+        try:
+            user = PoolUser.objects.get(email=email)
+        except PoolUser.DoesNotExist:
+            return Response(
+                {"detail": f"Користувач з email '{email}' не знайдений."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        serializer = PoolUserSerializer(user)
+        return Response(serializer.data)
