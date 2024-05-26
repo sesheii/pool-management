@@ -3,18 +3,17 @@ import './LoginForm.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
- 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
-  	setPassword(e.target.value);
+    setPassword(e.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -31,12 +30,10 @@ const LoginForm = () => {
         localStorage.setItem("access", response.data.access);
         localStorage.setItem("refresh", response.data.refresh);
         navigate('/home');
-      }
-      else {
+      } else {
         console.error(response.data.message);
       }
-    } 
-    catch (error) {
+    } catch (error) {
       console.error('Помилка запиту:', error);
     }
     setUsername('');
@@ -46,23 +43,24 @@ const LoginForm = () => {
   return (
     <div className="login-form-container">
       <form onSubmit={handleSubmit} className="login-form">
+        <h2>LOG IN</h2>
+        <hr />
         <div className="form-group">
-          <h2>Увійти</h2>
-          <label htmlFor="username">Ім'я користувача:</label>
           <input
-            type="username"
+            type="text"
             id="username"
             value={username}
             onChange={handleUsernameChange}
+            placeholder="Ім'я користувача"
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Пароль:</label>
           <input
             type="password"
             id="password"
             value={password}
             onChange={handlePasswordChange}
+            placeholder="Пароль"
           />
         </div>
         <button type="submit">Увійти</button>

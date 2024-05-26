@@ -1,10 +1,15 @@
 import React from 'react';
+import GlobalHeader from './GlobalHeader';
+import GlobalFooter from './GlobalFooter';
 
 const HomePage = () => {
   return (
     <div>
-      <h2>Головна</h2>
-      
+      <GlobalHeader />
+      <div className='HomePageContainer'>
+        
+      </div>
+      <GlobalFooter />
     </div>
   );
 }
