@@ -1,4 +1,4 @@
-.HomePageContainer {
+.Container {
   display: flex;
   justify-content: center;
   height: auto;
@@ -10,7 +10,7 @@
 
 .ContentContainer {
   display: flex;
-  height: 500px;
+  min-height: 90vh;
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 50px;

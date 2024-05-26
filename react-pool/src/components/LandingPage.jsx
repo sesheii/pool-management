@@ -1,5 +1,6 @@
 import React from 'react';
 import GlobalHeader from './GlobalHeader';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
   return (

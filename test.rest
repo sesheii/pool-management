@@ -9,3 +9,19 @@ Content-Type: application/json
 ###
 GET http://127.0.0.1:8000/api/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2Njg5MDIxLCJpYXQiOjE3MTY2ODU0MjEsImp0aSI6IjY5YThiOWVmZjExMTQxODRiOTExOGVhN2JmOTcyNmEwIiwidXNlcl9pZCI6MX0.Ak52gK3E9hBoC8MFP7VI_a6IXAGs0-Uuf0dc_XESiFs
+
+###
+POST http://127.0.0.1:8000/api/create-pool-user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2NzQ2MDk3LCJpYXQiOjE3MTY3NDI0OTcsImp0aSI6IjQwNjViZjUyZTJjMzRkMTA4YTM3YWMzOTQ4NzE5OTI2IiwidXNlcl9pZCI6MX0.5bUmkLeE1ganGqv6O0vQZzrI4vNRPz3_Uh0jj343K5M
+
+{
+    "first_name": "John",
+    "last_name": "Doe",
+    "email": "john.doe@example.com",
+    "age": 30
+}
+
+###
+DELETE http://127.0.0.1:8000/api/users/delete/Denys15@Denys.Denys/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2NzQ2MDk3LCJpYXQiOjE3MTY3NDI0OTcsImp0aSI6IjQwNjViZjUyZTJjMzRkMTA4YTM3YWMzOTQ4NzE5OTI2IiwidXNlcl9pZCI6MX0.5bUmkLeE1ganGqv6O0vQZzrI4vNRPz3_Uh0jj343K5M

@@ -1,0 +1,86 @@
+.Container {
+  display: flex;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+}
+
+.ContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: 95%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(45deg, #000000, #434343);
+}
+
+.transparent-button {
+  height: 50px;
+  width: auto;
+  margin-bottom: 20px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.transparent-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.user-card {
+  width: 300px;
+  height: 150px;
+  margin: 10px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  color: #000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-card-content {
+  flex: 1;
+}
+
+.user-card-content p {
+  margin: 5px 0;
+}
+
+.user-card-content strong {
+  font-weight: bold;
+}
+
+.delete-button {
+  height: 30px;
+  width: 100px;
+  align-self: flex-end;
+  margin-top: 10px;
+  background-color: #ff6347;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}

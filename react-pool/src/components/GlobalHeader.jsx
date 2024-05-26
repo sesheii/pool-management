@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from 'react';
 import './GlobalHeader.css'
 import { useNavigate } from 'react-router-dom';
+
 
 const GlobalHeader = () => {
   const navigate = useNavigate()

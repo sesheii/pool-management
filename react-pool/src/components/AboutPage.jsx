@@ -1,5 +1,6 @@
 import React from 'react';
 import aboutImage from './img/image.png'; // імпортуємо зображення
+import { useNavigate } from 'react-router-dom';
 
 const AboutPage = () => {
   return (

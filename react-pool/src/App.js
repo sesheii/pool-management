@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css'; // якщо ви використовуєте CSS
-import LoginForm from "./components/LoginForm.jsx"; 
 import HomePage from "./components/HomePage.jsx"; 
-import AboutPage from "./components/AboutPage.jsx"; 
-import SuccessPage from './components/SuccessPage.jsx';
 import LoginPage from './components/LoginPage.jsx';
 import LandingPage from './components/LandingPage.jsx';
+import UserList from './components/UserList.jsx';
+import CreatePoolUser from './components/CreatePoolUser.jsx';
 
 function App() {
   return (
@@ -18,6 +17,8 @@ function App() {
             <Route path='/' exact element={<LandingPage/>} />
             <Route path='/login' element={<LoginPage/>} />
             <Route path='/home' element={<HomePage/>} />
+            <Route path='/user-list' element={<UserList/>} />
+            <Route path='/create-pool-user' element={<CreatePoolUser/>} />
           </Routes>
         </div>
       </div>
