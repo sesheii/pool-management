@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class SubscriptionType(models.Model):
     name = models.CharField(max_length=50)
 
@@ -16,9 +17,7 @@ class PoolUser(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     age = models.IntegerField()
-    role = models.CharField(max_length=50)
     subscription = models.OneToOneField(Subscription, on_delete=models.CASCADE, null=True, blank=True)
-    password = models.CharField(max_length=18)
 
 class Checkin(models.Model):
     user = models.ForeignKey(PoolUser, on_delete=models.CASCADE)

@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import PoolUser, Subscription, SubscriptionType, Checkin
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 class SubscriptionTypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -18,7 +20,7 @@ class PoolUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PoolUser
-        fields = ['id', 'first_name', 'last_name', 'email', 'age', 'role', 'subscription', 'password']
+        fields = ['id', 'first_name', 'last_name', 'email', 'age', 'subscription']
 
 class CheckinSerializer(serializers.ModelSerializer):
     class Meta:

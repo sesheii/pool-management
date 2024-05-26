@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import './LoginForm.css';
-import Cookies from 'js-cookie'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
  
 const LoginForm = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate(); 
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -22,16 +21,16 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/validate-login/', {
-        email,
+      const response = await axios.post('http://127.0.0.1:8000/api/token/', {
+        username,
         password
       });
 
       if (response.status === 200) {
         console.log(response.data.message);
-        Cookies.set('email', email, { expires: 7 })
-        Cookies.set('password', password, { expires: 7 })
-        navigate('/success');
+        localStorage.setItem("access", response.data.access);
+        localStorage.setItem("refresh", response.data.refresh);
+        navigate('/home');
       }
       else {
         console.error(response.data.message);
@@ -40,10 +39,7 @@ const LoginForm = () => {
     catch (error) {
       console.error('Помилка запиту:', error);
     }
-    
-    // console.log(Cookies.get('email'))
-    // console.log(Cookies.get('password'))
-    setEmail('');
+    setUsername('');
     setPassword('');
   };
 
@@ -52,12 +48,12 @@ const LoginForm = () => {
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
           <h2>Увійти</h2>
-          <label htmlFor="email">Пошта:</label>
+          <label htmlFor="username">Ім'я користувача:</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={handleEmailChange}
+            type="username"
+            id="username"
+            value={username}
+            onChange={handleUsernameChange}
           />
         </div>
         <div className="form-group">

@@ -1,14 +1,14 @@
 import React from 'react';
 import GlobalHeader from './GlobalHeader';
 
-const SuccessPage = () => {
+const LandingPage = () => {
   return (
     <div>
       <GlobalHeader/>
-      <h2 className='Success-Page-Greet'>Успіх!</h2>
+      <h2>Вжух і ви приземлилися</h2>
+      
     </div>
   );
 }
-
-export default SuccessPage;
  
+export default LandingPage;

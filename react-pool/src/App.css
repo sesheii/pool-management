@@ -43,7 +43,13 @@ table {
 }
 
 .App {
-    background-image: linear-gradient(to top, rgb(30, 30, 76) 0%, rgb(0, 0, 30) 100%);
+    /* background-image: linear-gradient(to top, rgb(30, 30, 76) 0%, rgb(0, 0, 30) 100%); */
+    background-image: url('./components/img/bgimg-cropped.svg');
+    /* background-position: center top; */
+    background-size: cover;
+    /* margin-top: -2px; */
+    /* margin-left: -2px; */
+    /* margin-bottom: 10px; */
     /* display: flex; */
     /* flex-direction: column;
     align-items: center;
@@ -55,7 +61,7 @@ table {
   .App-header {
     background-color: #282c34;
     padding: 20px;
-    border-bottom: 2px solid #fff;
+    /* border-bottom: 2px solid #fff; */
     width: 100%;
     text-align: center;
   }
