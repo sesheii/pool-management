@@ -6,19 +6,38 @@ import './UserList.css';
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
-  const [search, setSearch] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage, setUsersPerPage] = useState(15); // Задайте кількість користувачів на сторінці тут
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchEmail, setSearchEmail] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const token = localStorage.getItem('access');
 
-  const fetchUsers = async () => {
+  const fetchUsers = async (email = '') => {
+    let endpoint = 'http://127.0.0.1:8000/api/pool-users-filter/';
+    if (email.trim() !== '') {
+      endpoint += `?email=${email.trim()}`;
+    }
+
     try {
-      const response = await axios.get('http://127.0.0.1:8000/api/pool-users/', {
+      const response = await axios.get(endpoint, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
 
       if (response.status === 200) {
-        setUsers(response.data);
+        const data = response.data;
+        const totalUsers = data.length;
+        setTotalPages(Math.ceil(totalUsers / usersPerPage));
+
+        const startIndex = (currentPage - 1) * usersPerPage;
+        const endIndex = startIndex + usersPerPage;
+        if (email.trim() === '') {
+          setUsers(data.slice(startIndex, endIndex));
+        } else {
+          setSearchResults(data);
+        }
       } else {
         console.error(response.data.message);
       }
@@ -28,16 +47,17 @@ const UserList = () => {
   };
 
   useEffect(() => {
-    fetchUsers();
-  }, [token]);
+    fetchUsers(searchEmail);
+  }, [token, currentPage, usersPerPage, searchEmail]);
 
   const handleSearchChange = (e) => {
-    setSearch(e.target.value);
+    setSearchEmail(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    fetchUsers();
+    setCurrentPage(1); // Починати з першої сторінки при новому пошуку
+    fetchUsers(searchEmail);
   };
 
   const handleDeleteUser = async (email) => {
@@ -49,8 +69,7 @@ const UserList = () => {
       });
 
       if (response.status === 204) {
-        // Оновлюємо список користувачів після видалення
-        fetchUsers();
+        fetchUsers(searchEmail);
       } else {
         console.error(response.data.message);
       }
@@ -59,17 +78,26 @@ const UserList = () => {
     }
   };
 
+  const goToPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div>
       <GlobalHeader />
       <div className='Container'>
         <div className='ContentContainer'>
-          <form onSubmit={handleSubmit}>
-            <button className='transparent-button' type="submit">Завантажити користувачів</button>
+          <form onSubmit={handleSearchSubmit}>
+            <input
+              type="text"
+              value={searchEmail}
+              onChange={handleSearchChange}
+              placeholder="Введіть email для пошуку"
+              className='search-input'
+            />
           </form>
           <div className="user-list">
-            {/* <h2>Список користувачів</h2> */}
-            {users.map(user => (
+            {(searchEmail.trim() === '' ? users : searchResults).map(user => (
               <div key={user.id} className="user-card">
                 <div className="user-card-content">
                   <p><strong>Ім'я:</strong> {user.first_name} {user.last_name}</p>
@@ -79,6 +107,11 @@ const UserList = () => {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="pagination">
+            <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>Назад</button>
+            <span>Сторінка {currentPage} з {totalPages}</span>
+            <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>Далі</button>
           </div>
         </div>
       </div>
