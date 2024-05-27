@@ -17,7 +17,7 @@ const UserDetails = () => {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
   const [price, setPrice] = useState(0);
-  const [success, setSuccess] = useState(false); // Додано стан для успішного оновлення підписки
+  const [success, setSuccess] = useState(false);
   const token = localStorage.getItem('access');
 
   useEffect(() => {
@@ -132,7 +132,7 @@ const UserDetails = () => {
           {error}
         </div>
       )}
-      {success && ( // Відображення успішного оновлення підписки
+      {success && (
         <div className="alert alert-success" role="alert">
           Підписка успішно оновлена!
         </div>

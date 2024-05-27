@@ -6,7 +6,6 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Логіка для обробки логіну
     console.log('Логін:', username, password);
   };
 

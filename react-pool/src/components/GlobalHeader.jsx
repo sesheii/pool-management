@@ -30,9 +30,6 @@ const GlobalHeader = () => {
       <div className="header-right">
         <nav>
           <ul className="d-flex">
-            
-            {/* <li className="mx-3">About</li>
-            <li className="mx-3">Contact</li> */}
 
             <li>
               {isLoggedIn && (
@@ -57,17 +54,3 @@ const GlobalHeader = () => {
 }
 
 export default GlobalHeader;
-
-/*
-return (
-    <div className="GlobalHeader">
-      <h1 className="WhiteText">Cool header text</h1>
-      {isLoggedIn && (
-        <button className="LogOutButton" onClick={handleLogoutClick}>
-          sign out
-        </button>
-      )}
-  
-    </div>
-  )
-*/

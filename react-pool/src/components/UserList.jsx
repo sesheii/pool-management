@@ -8,7 +8,7 @@ import './UserList.css';
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(15); // Задайте кількість користувачів на сторінці тут
+  const [usersPerPage, setUsersPerPage] = useState(15);
   const [totalPages, setTotalPages] = useState(1);
   const [searchEmail, setSearchEmail] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -58,7 +58,7 @@ const UserList = () => {
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
-    setCurrentPage(1); // Починати з першої сторінки при новому пошуку
+    setCurrentPage(1);
     fetchUsers(searchEmail);
   };
 

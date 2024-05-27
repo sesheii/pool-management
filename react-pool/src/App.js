@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css'; // якщо ви використовуєте CSS
+import './App.css';
 import HomePage from "./components/HomePage.jsx"; 
 import LoginPage from './components/LoginPage.jsx';
 import LandingPage from './components/LandingPage.jsx';

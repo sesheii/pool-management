@@ -44,7 +44,6 @@ const CreatePoolUser = () => {
       setAlertType('danger');
     }
 
-    // Очистити повідомлення через 5 секунд
     setTimeout(() => {
       setAlertMessage(null);
       setAlertType(null);

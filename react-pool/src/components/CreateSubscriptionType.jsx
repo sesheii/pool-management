@@ -53,7 +53,7 @@ const CreateSubscriptionType = () => {
       if (response.status === 201) {
         setAlertMessage('Тип підписки успішно створений!');
         setAlertType('success');
-        fetchSubscriptionTypes(); // Оновити список типів підписки
+        fetchSubscriptionTypes();
       } else {
         setAlertMessage(response.data.message);
         setAlertType('danger');
@@ -78,7 +78,7 @@ const CreateSubscriptionType = () => {
       });
       setAlertMessage('Тип підписки успішно видалений!');
       setAlertType('success');
-      fetchSubscriptionTypes(); // Оновити список типів підписки
+      fetchSubscriptionTypes();
     } catch (error) {
       setAlertMessage('Помилка запиту: ' + error.message);
       setAlertType('danger');
