@@ -9,7 +9,6 @@ import UserList from './components/UserList.jsx';
 import CreatePoolUser from './components/CreatePoolUser.jsx';
 import UserDetails from './components/UserDetails.jsx';
 import CreateSubscriptionType from './components/CreateSubscriptionType.jsx';
-import AssignSubscription from './components/AssignSubscription.jsx';
 
 function App() {
   return (
@@ -24,8 +23,6 @@ function App() {
             <Route path='/create-pool-user' element={<CreatePoolUser/>} />
             <Route path='/user-details/:email' element={<UserDetails/>} />
             <Route path='/createsub-scription-type' element={<CreateSubscriptionType/>} />
-            <Route path='/assign-subscription' element={<AssignSubscription/>} />
-            
           </Routes>
         </div>
       </div>

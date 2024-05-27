@@ -32,7 +32,6 @@ const HomePage = () => {
           <button className='transparent-button' onClick={handleUserListRedirect}>User List</button>
           <button className='transparent-button' onClick={handleCreatePoolUserRedirect}>Create User</button>
           <button className='transparent-button' onClick={handleCreateSubscriptionTypeRedirect}>Subscription Type</button>
-          <button className='transparent-button' onClick={handleAssignSubscriptionRedirect}>Assign Subscription</button>
         </div>
       </div>
       <GlobalFooter />
