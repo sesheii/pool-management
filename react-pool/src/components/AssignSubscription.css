@@ -1,0 +1,64 @@
+/* AssignSubscription.css */
+
+.Container {
+  display: flex;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  border-radius: 8px;
+  background: transparent;
+  color: white;
+}
+
+.ContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90vh;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 50px;
+  width: 95%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(45deg, #000000, #434343);
+}
+
+.assign-form .form-group {
+  margin-bottom: 20px;
+}
+
+.assign-form label {
+  display: block;
+  margin-bottom: 5px;
+  color: white; /* Додаємо білий колір тексту для міток */
+}
+
+.assign-form select,
+.assign-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid white;
+  border-radius: 4px;
+  background: transparent;
+  color: white; /* Додаємо білий колір тексту для введення і вибору */
+}
+
+.assign-form option {
+  color: black; /* Чорний колір тексту для випадаючих елементів */
+}
+
+.assign-form button {
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 4px;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.assign-form button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}

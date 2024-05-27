@@ -1,4 +1,4 @@
-.GlobalHeader {
+.GlobalHeader1 {
     height: 90px;
     /* background-color: rgb(17, 42, 70); */
     background: linear-gradient(45deg, #000000, #434343);
@@ -8,18 +8,20 @@
     padding-right: 100px;
 }
 
-.LogOutButton {
+.LogOutButton1 {
     width: auto;
 }
 
-.WhiteText {
+.WhiteText1 {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 35px;
     color: aliceblue;
 }
 
 /* src/components/Button.css */
-.transparent-button {
+.transparent-button1 {
+  margin-top: 15px;
+  height: auto;
   background-color: transparent; /* Transparent background */
   color: white; /* White text color */
   border: 2px solid white; /* White rectangular border */
@@ -33,11 +35,11 @@
   justify-content: center; /* Center items horizontally */
 }
 
-.transparent-button:hover {
+.transparent-button1:hover {
   background-color: rgba(255, 255, 255, 0.2); /* Darker background on hover */
 }
 
-.spacer {
+.spacer1 {
   display: inline-block;
   width: 20px;
   height: 20px;

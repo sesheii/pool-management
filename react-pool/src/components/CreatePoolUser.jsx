@@ -12,6 +12,9 @@ const CreatePoolUser = () => {
     age: ''
   });
 
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [alertType, setAlertType] = useState(null);
+
   const token = localStorage.getItem('access');
 
   const handleChange = (e) => {
@@ -30,22 +33,35 @@ const CreatePoolUser = () => {
       });
 
       if (response.status === 201) {
-        console.log('Користувач успішно створений!');
-        // Optionally handle success message or redirect to another page
+        setAlertMessage('Користувач успішно створений!');
+        setAlertType('success');
       } else {
-        console.error(response.data.message);
+        setAlertMessage(response.data.message);
+        setAlertType('danger');
       }
     } catch (error) {
-      console.error('Помилка запиту:', error);
+      setAlertMessage('Помилка запиту: ' + error.message);
+      setAlertType('danger');
     }
+
+    // Очистити повідомлення через 5 секунд
+    setTimeout(() => {
+      setAlertMessage(null);
+      setAlertType(null);
+    }, 5000);
   };
 
   return (
     <div>
       <GlobalHeader />
-      <div className='Container'>
-        <div className='ContentContainer'>
+      <div className='Container1'>
+        <div className='ContentContainer1 d-flex flex-column'>
           <h2>Створення нового користувача</h2>
+          {alertMessage && (
+            <div className={`alert alert-${alertType}`} role="alert">
+              {alertMessage}
+            </div>
+          )}
           <form onSubmit={handleSubmit} className='create-form'>
             <div className='form-group'>
               <label htmlFor='first_name'>Ім'я:</label>
@@ -55,6 +71,7 @@ const CreatePoolUser = () => {
                 name='first_name'
                 value={formData.first_name}
                 onChange={handleChange}
+                className='form-control'
                 required
               />
             </div>
@@ -66,6 +83,7 @@ const CreatePoolUser = () => {
                 name='last_name'
                 value={formData.last_name}
                 onChange={handleChange}
+                className='form-control'
                 required
               />
             </div>
@@ -77,21 +95,23 @@ const CreatePoolUser = () => {
                 name='email'
                 value={formData.email}
                 onChange={handleChange}
+                className='form-control'
                 required
               />
             </div>
             <div className='form-group'>
               <label htmlFor='age'>Вік:</label>
               <input
-                type='number'
+                type='date'
                 id='age'
                 name='age'
                 value={formData.age}
                 onChange={handleChange}
+                className='form-control'
                 required
               />
             </div>
-            <button type='submit'>Створити користувача</button>
+            <button type='submit' className='btn btn-primary'>Створити користувача</button>
           </form>
         </div>
       </div>

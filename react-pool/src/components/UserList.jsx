@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import GlobalHeader from './GlobalHeader';
 import GlobalFooter from './GlobalFooter';
 import './UserList.css';
@@ -12,6 +13,7 @@ const UserList = () => {
   const [searchEmail, setSearchEmail] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const token = localStorage.getItem('access');
+  const navigate = useNavigate();
 
   const fetchUsers = async (email = '') => {
     let endpoint = 'http://127.0.0.1:8000/api/pool-users-filter/';
@@ -82,11 +84,15 @@ const UserList = () => {
     setCurrentPage(pageNumber);
   };
 
+  const handleViewDetails = (email) => {
+    navigate(`/user-details/${email}`);
+  };
+
   return (
     <div>
       <GlobalHeader />
-      <div className='Container'>
-        <div className='ContentContainer'>
+      <div className='Container2'>
+        <div className='ContentContainer2'>
           <form onSubmit={handleSearchSubmit}>
             <input
               type="text"
@@ -104,13 +110,14 @@ const UserList = () => {
                   <p><strong>Email:</strong> {user.email}</p>
                   <p><strong>Вік:</strong> {user.age}</p>
                   <button className="delete-button" onClick={() => handleDeleteUser(user.email)}>Видалити</button>
+                  <button className="details-button" onClick={() => handleViewDetails(user.email)}>Деталі</button>
                 </div>
               </div>
             ))}
           </div>
           <div className="pagination">
             <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>Назад</button>
-            <span>Сторінка {currentPage} з {totalPages}</span>
+            <span className='white-text'>Сторінка {currentPage} з {totalPages}</span>
             <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>Далі</button>
           </div>
         </div>
