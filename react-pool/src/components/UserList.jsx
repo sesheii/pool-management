@@ -108,7 +108,7 @@ const UserList = () => {
                 <div className="user-card-content">
                   <p><strong>Ім'я:</strong> {user.first_name} {user.last_name}</p>
                   <p><strong>Email:</strong> {user.email}</p>
-                  <p><strong>Вік:</strong> {user.age}</p>
+                  <p><strong>д.н.:</strong> {user.age}</p>
                   <button className="delete-button" onClick={() => handleDeleteUser(user.email)}>Видалити</button>
                   <button className="details-button" onClick={() => handleViewDetails(user.email)}>Деталі</button>
                 </div>

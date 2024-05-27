@@ -137,7 +137,7 @@ const UserDetails = () => {
               <h3>Інформація про користувача</h3>
               <p><strong>Ім'я:</strong> {userData.user.first_name} {userData.user.last_name}</p>
               <p><strong>Email:</strong> {userData.user.email}</p>
-              <p><strong>Вік:</strong> {userData.user.age}</p>
+              <p><strong>Дата народження:</strong> {userData.user.age}</p>
 
               <h3>Інформація про підписку</h3>
               <div className={`subscription-card ${new Date(userData.subscription.end_date) < new Date() ? 'expired' : ''}`}>
