@@ -68,3 +68,14 @@ button:hover {
 .spacer {
   height: 20px;
 }
+
+.subscription-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.subscription-card.expired {
+  background-color: #f2f2f2;
+}

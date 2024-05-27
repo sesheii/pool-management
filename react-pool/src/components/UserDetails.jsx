@@ -134,18 +134,23 @@ const UserDetails = () => {
           <h2>Деталі користувача</h2>
           {userData && (
             <div className="user-details">
-              <h3>Інформація про користувача</h3>
               <p><strong>Ім'я:</strong> {userData.user.first_name} {userData.user.last_name}</p>
               <p><strong>Email:</strong> {userData.user.email}</p>
               <p><strong>Дата народження:</strong> {userData.user.age}</p>
 
               <h3>Інформація про підписку</h3>
-              <div className={`subscription-card ${new Date(userData.subscription.end_date) < new Date() ? 'expired' : ''}`}>
-                <p><strong>Тип підписки:</strong> {userData.subscription.subscription_type.name}</p>
-                <p><strong>Дата початку:</strong> {userData.subscription.start_date}</p>
-                <p><strong>Дата закінчення:</strong> {userData.subscription.end_date}</p>
-                <p><strong>Ціна:</strong> {userData.subscription.price} грн</p>
-              </div>
+              {userData.subscription ? (
+                <div className={`subscription-card ${new Date(userData.subscription.end_date) < new Date() ? 'expired' : ''}`}>
+                  <p><strong>Тип підписки:</strong> {userData.subscription.subscription_type.name}</p>
+                  <p><strong>Дата початку:</strong> {userData.subscription.start_date}</p>
+                  <p><strong>Дата закінчення:</strong> {userData.subscription.end_date}</p>
+                  <p><strong>Ціна:</strong> {userData.subscription.price} грн</p>
+                </div>
+              ) : (
+                <div className="subscription-card empty">
+                  <p>Немає підписки</p>
+                </div>
+              )}
 
               <h3>Оновити підписку</h3>
               <select
@@ -171,18 +176,18 @@ const UserDetails = () => {
                 onChange={(e) => setEndDate(e.target.value)}
                 className="form-control"
               />
-              <div className='spacer'/>
+              <div className="spacer" />
               <div className="price-display">
                 <strong>Ціна: {price} грн</strong>
               </div>
-              <div className='spacer'/>
+              <div className="spacer" />
               <button onClick={handleSubscriptionChange} className="btn btn-primary">Оновити</button>
             </div>
           )}
         </div>
       </div>
       <GlobalFooter />
-    </div>
+    </div>  
   );
 };
 
