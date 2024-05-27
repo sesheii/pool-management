@@ -161,15 +161,42 @@ const UserDetails = () => {
     }
   };
 
+  const getActiveSubscriptionType = () => {
+    if (userData.subscription && subscriptionTypes.length > 0) {
+      // Шукаємо тип підписки користувача серед отриманих типів підписок
+      return subscriptionTypes.find(type => type.id === userData.subscription.subscription_type.id);
+    }
+    return null;
+  };
+
+
+  const isActiveTime = () => {
+    const activeSubscription = getActiveSubscriptionType();
+    if (activeSubscription) {
+      // Отримуємо поточний час
+      const currentTime = new Date().getTime();
+      // Отримуємо початковий та кінцевий час активного типу підписки
+      const startTime = new Date(currentTime).setHours(activeSubscription.start_time.split(':')[0], activeSubscription.start_time.split(':')[1]);
+      const endTime = new Date(currentTime).setHours(activeSubscription.end_time.split(':')[0], activeSubscription.end_time.split(':')[1]);
+      // Перевіряємо, чи поточний час знаходиться в межах визначеного часового діапазону
+      return currentTime >= startTime && currentTime <= endTime;
+    }
+    return false;
+  };
+
+
   const renderCheckInButton = () => {
     const hasSubscription = userData.subscription.price !== null;
     const subscriptionExpired = new Date(userData.subscription.end_date) < new Date();
+    const activeSubscription = getActiveSubscriptionType(); // Отримуємо активний тип підписки
 
-    if (!hasSubscription || subscriptionExpired) {
+    if (!hasSubscription || subscriptionExpired || !isActiveTime()) {
+      // Якщо немає підписки, або підписка закінчилася, або час не відповідає діапазону активності, кнопка Check In має бути сірою та неактивною
       return (
         <button className="btn btn-secondary" disabled>Check In</button>
       );
     } else {
+      // Якщо є активний тип підписки і час відповідає діапазону, кнопка Check In має бути активною
       return (
         <button onClick={handleCheckinToggle} className={`btn ${isCheckedIn ? 'btn-danger' : 'btn-success'}`}>
           {isCheckedIn ? 'Check Out' : 'Check In'}
@@ -177,6 +204,7 @@ const UserDetails = () => {
       );
     }
   };
+
 
 
   useEffect(() => {
