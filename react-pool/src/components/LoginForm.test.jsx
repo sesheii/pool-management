@@ -4,7 +4,6 @@ import LoginForm from './LoginForm';
 import axios from 'axios';
 import { MemoryRouter, useNavigate } from 'react-router-dom';
 
-// Mock axios and useNavigate
 jest.mock('axios');
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

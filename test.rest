@@ -30,3 +30,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 ###
 GET http://127.0.0.1:8000/api/user-groups/
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2ODEwODk3LCJpYXQiOjE3MTY4MDcyOTcsImp0aSI6Ijc1ODEwNzljMmEyNzRhNjY5ZGFiOTA1OGNlYjlkODliIiwidXNlcl9pZCI6MX0.Uj-5vKkX5jk6pXKaNlCzu1doSArRWi-M8R6i4ExnrU0
+
+###
+DELETE https://xl0322bk-8000.euw.devtunnels.ms/profile/Bobus/delete/

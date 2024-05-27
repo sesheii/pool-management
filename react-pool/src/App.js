@@ -10,6 +10,8 @@ import CreatePoolUser from './components/CreatePoolUser.jsx';
 import UserDetails from './components/UserDetails.jsx';
 import CreateSubscriptionType from './components/CreateSubscriptionType.jsx';
 import RegisterForm from './components/RegisterForm.jsx';
+import WebSocket from './components/WebSocket.jsx';
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
             <Route path='/user-details/:email' element={<UserDetails/>} />
             <Route path='/createsub-scription-type' element={<CreateSubscriptionType/>} />
             <Route path='/register' element={<RegisterForm/>} />
+            <Route path='/web-socket' element={<WebSocket/>} />
           </Routes>
         </div>
       </div>

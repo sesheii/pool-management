@@ -60,7 +60,7 @@ describe('UserList Component', () => {
   });
 
   it('handles empty search results', async () => {
-    axios.get.mockResolvedValueOnce({ status: 200, data: [] }); // No results
+    axios.get.mockResolvedValueOnce({ status: 200, data: [] });
     render(<UserList />, { wrapper: MemoryRouter });
     fireEvent.change(screen.getByPlaceholderText('Введіть email для пошуку'), {
       target: { value: 'nonexistent@example.com' }
@@ -74,7 +74,7 @@ describe('UserList Component', () => {
 
   it('deletes a user successfully', async () => {
     axios.get.mockResolvedValueOnce({ status: 200, data: mockUsers });
-    axios.delete.mockResolvedValueOnce({ status: 204 }); // No content
+    axios.delete.mockResolvedValueOnce({ status: 204 });
 
     render(<UserList />, { wrapper: MemoryRouter });
 
@@ -106,11 +106,6 @@ describe('UserList Component', () => {
   });
 
   describe('UserList Component', () => {
-  // ... (mockUsers data and setup)
-
-  // ... (existing tests)
-
-  // Additional tests for increased coverage
 
   it('navigates to user details page', async () => {
     axios.get.mockResolvedValueOnce({ status: 200, data: mockUsers });
@@ -120,7 +115,7 @@ describe('UserList Component', () => {
     render(<UserList />, { wrapper: MemoryRouter });
 
     await waitFor(() => {
-      fireEvent.click(screen.getAllByText('Деталі')[0]); // Click the first "Details" button
+      fireEvent.click(screen.getAllByText('Деталі')[0]);
     });
 
     expect(mockNavigate).toHaveBeenCalledWith('/user-details/john.doe@example.com');
@@ -131,10 +126,8 @@ describe('UserList Component', () => {
 
     render(<UserList />, { wrapper: MemoryRouter });
 
-    // Ensure no error is displayed initially
     expect(screen.queryByText(/Помилка запиту/i)).toBeNull();
 
-    // Wait for the error to be logged
     await waitFor(() => {
       expect(consoleErrorMock).not.toHaveBeenCalledWith('Server Error');
     });
@@ -203,10 +196,9 @@ describe('UserList Component', () => {
       age: 20 + i,
     }));
 
-    // Mock API response for page 2 initially
     axios.get.mockResolvedValueOnce({ 
       status: 200, 
-      data: mockManyUsers.slice(15) // Users for page 2
+      data: mockManyUsers.slice(15)
     });
 
     render(<UserList />, { wrapper: MemoryRouter });
@@ -223,7 +215,6 @@ describe('UserList Component', () => {
       
     });
 
-    // Mock API response for page 1 when "Previous" is clicked
     axios.get.mockResolvedValueOnce({ status: 200, data: mockManyUsers.slice(0, 15) });
 
     fireEvent.click(screen.getByText('Назад'));
@@ -239,7 +230,6 @@ describe('UserList Component', () => {
     
   });
 
-  // Test for case when no token is available
   it('does not fetch users and does not render the list if no token is available', async () => {
     Object.defineProperty(window, 'localStorage', {
       value: {
@@ -250,7 +240,6 @@ describe('UserList Component', () => {
 
     render(<UserList />, { wrapper: MemoryRouter });
 
-    // Wait a bit to ensure useEffect doesn't run
     await new Promise(resolve => setTimeout(resolve, 100));
 
     expect(axios.get).toHaveBeenCalled();
