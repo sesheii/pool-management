@@ -8,6 +8,7 @@ import userIcon from './img/Untitled.png';
 
 const HomePage = () => {
   const [checkedInUsersCount, setCheckedInUsersCount] = useState(0);
+  const [isAdmin, setIsAdmin] = useState(false);
   const token = localStorage.getItem('access');
 
   useEffect(() => {
@@ -26,7 +27,25 @@ const HomePage = () => {
       }
     };
 
+    const fetchUserGroups = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/user-groups/', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (response.status === 200) {
+          if (response.data.includes('system admin')) {
+            setIsAdmin(true);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching user groups:', error);
+      }
+    };
+
     fetchCheckedInUsersCount();
+    fetchUserGroups();
   }, []);
 
   const navigate = useNavigate();
@@ -47,6 +66,10 @@ const HomePage = () => {
     navigate('/assign-subscription');
   }; 
 
+  const handleRegisterFormRedirect = () => {
+    navigate('/register');
+  };
+
   return (
     <div>
       <GlobalHeader />
@@ -60,7 +83,8 @@ const HomePage = () => {
           </div>
           <button className='transparent-button111' onClick={handleUserListRedirect}>User List</button>
           <button className='transparent-button111' onClick={handleCreatePoolUserRedirect}>Create User</button>
-          <button className='transparent-button111' onClick={handleCreateSubscriptionTypeRedirect}>Subscription Type</button>
+          {isAdmin && <button className='transparent-button111' onClick={handleCreateSubscriptionTypeRedirect}>Subscription Type</button>}
+          {isAdmin && <button className='transparent-button111' onClick={handleRegisterFormRedirect}>Register a user</button>}
         </div>
       </div>
       <GlobalFooter />

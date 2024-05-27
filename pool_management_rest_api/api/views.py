@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.contrib.auth.models import User, Group
 
 
 class Home(APIView):
@@ -210,3 +211,32 @@ class ToggleUserCheckinStatus(APIView):
             Checkin.objects.create(user=user, checked_in=True)
 
         return Response({'message': 'Checkin status updated successfully'})
+
+
+class UserGroupsView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = request.user
+        groups = Group.objects.filter(user=user)
+        group_names = [group.name for group in groups]
+        return Response(group_names, status=status.HTTP_200_OK)
+
+
+class CreateUserView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            data = request.data
+            user = User.objects.create_user(
+                username=data['username'],
+                email=data['email'],
+                first_name=data['first_name'],
+                last_name=data['last_name'],
+                password=data['password']
+            )
+            return Response({'message': 'Користувач успішно створений!'}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)

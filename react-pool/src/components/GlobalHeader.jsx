@@ -15,7 +15,7 @@ const GlobalHeader = () => {
   const isLoggedIn = !!localStorage.getItem('access');
 
   const hangleLogoClick = () => {
-    navigate('/landing')
+    navigate('/')
   }
 
   const hangleHomeClick = () => {
