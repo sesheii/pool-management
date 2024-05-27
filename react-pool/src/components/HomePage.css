@@ -21,10 +21,10 @@
   background: linear-gradient(45deg, #000000, #434343);
 }
 
-.transparent-button {
+.transparent-button111 {
   height: 50px;
-  width: auto;
-  margin: 50px;
+  width: 50%;
+  margin: 10px;
   background-color: transparent;
   color: white;
   border: 2px solid white; 
@@ -38,7 +38,7 @@
   justify-content: center;
 }
 
-.transparent-button:hover {
+.transparent-button111:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
@@ -47,4 +47,47 @@
   width: 20px;
   height: 20px;
   background-color: transparent;
+}
+
+.Card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.UserIcon {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.CardContent {
+  flex-grow: 1;
+}
+
+.Button {
+  height: 50px;
+  width: auto;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px; 
+  font-size: 20px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
+}
+
+.Button:hover {
+  background-color: #0056b3;
+}
+
+
+.Black-Text {
+  color: black;
 }
