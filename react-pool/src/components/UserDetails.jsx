@@ -16,6 +16,7 @@ const UserDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
+  const [price, setPrice] = useState(0);
   const token = localStorage.getItem('access');
 
   useEffect(() => {
@@ -92,6 +93,25 @@ const UserDetails = () => {
     }
   };
 
+  const calculatePrice = () => {
+    if (selectedSubscriptionType && startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const subscriptionType = subscriptionTypes.find(type => type.id === parseInt(selectedSubscriptionType));
+      if (subscriptionType) {
+        setPrice(diffDays * subscriptionType.daily_price);
+      }
+    } else {
+      setPrice(0);
+    }
+  };
+
+  useEffect(() => {
+    calculatePrice();
+  }, [selectedSubscriptionType, startDate, endDate]);
+
   useEffect(() => {
     if (showError) {
       const timer = setTimeout(() => setShowError(false), 5000);
@@ -120,24 +140,18 @@ const UserDetails = () => {
               <p><strong>Вік:</strong> {userData.user.age}</p>
 
               <h3>Інформація про підписку</h3>
-              <p><strong>Тип підписки:</strong> {userData.subscription.subscription_type.name}</p>
-              <p><strong>Дата початку:</strong> {userData.subscription.start_date}</p>
-              <p><strong>Дата закінчення:</strong> {userData.subscription.end_date}</p>
-
-              <h3>Чекіни</h3>
-              <div className="checkin-cards">
-                {userData.checkins.map((checkin, index) => (
-                  <div key={index} className="checkin-card">
-                    <p><strong>Дата:</strong> {checkin.date}</p>
-                    <p><strong>Локація:</strong> {checkin.location}</p>
-                  </div>
-                ))}
+              <div className={`subscription-card ${new Date(userData.subscription.end_date) < new Date() ? 'expired' : ''}`}>
+                <p><strong>Тип підписки:</strong> {userData.subscription.subscription_type.name}</p>
+                <p><strong>Дата початку:</strong> {userData.subscription.start_date}</p>
+                <p><strong>Дата закінчення:</strong> {userData.subscription.end_date}</p>
+                <p><strong>Ціна:</strong> {userData.subscription.price} грн</p>
               </div>
 
               <h3>Оновити підписку</h3>
               <select
                 value={selectedSubscriptionType}
                 onChange={(e) => setSelectedSubscriptionType(e.target.value)}
+                className="form-control"
               >
                 <option value="">Оберіть тип підписки</option>
                 {subscriptionTypes.map((type) => (
@@ -148,15 +162,21 @@ const UserDetails = () => {
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className='form-control'
+                className="form-control"
+                min={new Date().toISOString().split('T')[0]}
               />
               <input
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className='form-control'
+                className="form-control"
               />
-              <button onClick={handleSubscriptionChange}>Оновити</button>
+              <div className='spacer'/>
+              <div className="price-display">
+                <strong>Ціна: {price} грн</strong>
+              </div>
+              <div className='spacer'/>
+              <button onClick={handleSubscriptionChange} className="btn btn-primary">Оновити</button>
             </div>
           )}
         </div>
