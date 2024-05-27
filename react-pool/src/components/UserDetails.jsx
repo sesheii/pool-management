@@ -30,6 +30,7 @@ const UserDetails = () => {
 
         if (response.status === 200) {
           setUserData(response.data);
+          console.log(userData.subscription)
         } else {
           setError('Не вдалося завантажити дані користувача');
           setShowError(true);
@@ -139,16 +140,16 @@ const UserDetails = () => {
               <p><strong>Дата народження:</strong> {userData.user.age}</p>
 
               <h3>Інформація про підписку</h3>
-              {userData.subscription === null || userData.subscription === undefined ? (
+              {userData.subscription.price === null ? (
+                <div className="subscription-card empty">
+                  <p>Немає підписки</p>
+                </div>
+              ) : (
                 <div className={`subscription-card ${new Date(userData.subscription.end_date) < new Date() ? 'expired' : ''}`}>
                   <p><strong>Тип підписки:</strong> {userData.subscription.subscription_type.name}</p>
                   <p><strong>Дата початку:</strong> {userData.subscription.start_date}</p>
                   <p><strong>Дата закінчення:</strong> {userData.subscription.end_date}</p>
                   <p><strong>Ціна:</strong> {userData.subscription.price} грн</p>
-                </div>
-              ) : (
-                <div className="subscription-card empty">
-                  <p>Немає підписки</p>
                 </div>
               )}
 
