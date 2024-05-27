@@ -122,37 +122,6 @@ class DeleteSubscriptionType(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-# class AssignSubscriptionView(APIView):
-#     def post(self, request, user_id):
-#         try:
-#             user = PoolUser.objects.get(id=user_id)
-#         except PoolUser.DoesNotExist:
-#             return Response({'error': 'Користувача не знайдено'}, status=status.HTTP_404_NOT_FOUND)
-        
-#         subscription_type_id = request.data.get('subscription_type')
-#         start_date = request.data.get('start_date')
-#         end_date = request.data.get('end_date')
-        
-#         try:
-#             subscription_type = SubscriptionType.objects.get(id=subscription_type_id)
-#         except SubscriptionType.DoesNotExist:
-#             return Response({'error': 'Тип підписки не знайдено'}, status=status.HTTP_404_NOT_FOUND)
-        
-#         subscription_data = {
-#             'subscription_type': subscription_type.id,  # Передаємо ідентифікатор типу підписки, а не об'єкт
-#             'start_date': start_date,
-#             'end_date': end_date
-#         }
-        
-#         serializer = SubscriptionSerializer(data=subscription_data)
-#         if serializer.is_valid():
-#             subscription = serializer.save()
-#             user.subscription = subscription
-#             user.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 class UpdateSubscriptionView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -172,8 +141,9 @@ class UpdateSubscriptionView(APIView):
 
         price = subscription_type.daily_price * duration_days
 
+        # Update or create the subscription
         subscription, created = Subscription.objects.update_or_create(
-            pooluser=user,
+            id=user.subscription.id if user.subscription else None,
             defaults={
                 'subscription_type': subscription_type,
                 'price': price,
@@ -181,6 +151,10 @@ class UpdateSubscriptionView(APIView):
                 'end_date': end_date_obj
             }
         )
+
+        # Assign the subscription to the user
+        user.subscription = subscription
+        user.save()
 
         serializer = SubscriptionSerializer(subscription)
         return Response(serializer.data, status=status.HTTP_200_OK)

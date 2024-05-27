@@ -21,7 +21,7 @@ class PoolUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
-    age = models.IntegerField()
+    age = models.DateField()
     subscription = models.OneToOneField(Subscription, on_delete=models.CASCADE, null=True, blank=True)
 
 class Checkin(models.Model):
