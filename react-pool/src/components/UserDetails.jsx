@@ -18,6 +18,7 @@ const UserDetails = () => {
   const [showError, setShowError] = useState(false);
   const [price, setPrice] = useState(0);
   const [success, setSuccess] = useState(false);
+  const [isCheckedIn, setIsCheckedIn] = useState(false);
   const token = localStorage.getItem('access');
 
   useEffect(() => {
@@ -63,9 +64,58 @@ const UserDetails = () => {
       }
     };
 
+    const fetchCheckinStatus = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/api/check-in-status/', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
+          params: {
+            email: email
+          }
+        });
+
+        if (response.status === 200) {
+          setIsCheckedIn(response.data.checked_in);
+        } else {
+          setError('Не вдалося отримати статус check-in користувача');
+          setShowError(true);
+        }
+      } catch (error) {
+        setError('Помилка запиту: ' + error.message);
+        setShowError(true);
+      }
+    };
+
     fetchUserDetails();
     fetchSubscriptionTypes();
+    fetchCheckinStatus();
   }, [email, token]);
+
+  const handleCheckinToggle = async () => {
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/toggle-check-in-status/', {
+        email: email
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (response.status === 200) {
+        setIsCheckedIn(prev => !prev);
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 5000);
+      } else {
+        setError('Не вдалося змінити статус check-in користувача');
+        setShowError(true);
+      }
+    } catch (error) {
+      setError('Помилка запиту: ' + error.message);
+      setShowError(true);
+    }
+  };
+
 
   const handleSubscriptionChange = async () => {
     try {
@@ -110,6 +160,24 @@ const UserDetails = () => {
       setPrice(0);
     }
   };
+
+  const renderCheckInButton = () => {
+    const hasSubscription = userData.subscription.price !== null;
+    const subscriptionExpired = new Date(userData.subscription.end_date) < new Date();
+
+    if (!hasSubscription || subscriptionExpired) {
+      return (
+        <button className="btn btn-secondary" disabled>Check In</button>
+      );
+    } else {
+      return (
+        <button onClick={handleCheckinToggle} className={`btn ${isCheckedIn ? 'btn-danger' : 'btn-success'}`}>
+          {isCheckedIn ? 'Check Out' : 'Check In'}
+        </button>
+      );
+    }
+  };
+
 
   useEffect(() => {
     calculatePrice();
@@ -160,6 +228,8 @@ const UserDetails = () => {
                 </div>
               )}
 
+
+              {renderCheckInButton()}
               <h3>Оновити підписку</h3>
               <select
                 value={selectedSubscriptionType}
@@ -190,6 +260,7 @@ const UserDetails = () => {
               </div>
               <div className="spacer" />
               <button onClick={handleSubscriptionChange} className="btn btn-primary">Оновити</button>
+              <div className="spacer" />
             </div>
           )}
         </div>
