@@ -35,7 +35,7 @@ const LoginForm = () => {
         setError(response.data.message);
       }
     } catch (error) {
-      console.error('Помилка запиту:', error);
+      // console.error('Помилка запиту:', error);
       setError('Невдала спроба входу. Будь ласка, перевірте свої дані та спробуйте знову.');
     }
     setUsername('');

@@ -36,7 +36,11 @@ const UserList = () => {
         const startIndex = (currentPage - 1) * usersPerPage;
         const endIndex = startIndex + usersPerPage;
         if (email.trim() === '') {
-          setUsers(data.slice(startIndex, endIndex));
+          try {
+            setUsers(data.slice(startIndex, endIndex));
+          } catch(error) {
+            console.log(0);
+          }
         } else {
           setSearchResults(data);
         }
@@ -44,7 +48,8 @@ const UserList = () => {
         console.error(response.data.message);
       }
     } catch (error) {
-      console.error('Помилка запиту:', error);
+      //не розкоментовувати
+      // console.error('Помилка запиту:', error);
     }
   };
 

@@ -44,7 +44,7 @@ const RegisterForm = () => {
         setError(response.data.message);
       }
     } catch (error) {
-      console.error('Помилка запиту:', error);
+      // console.error('Помилка запиту:', error);
       setError('Помилка реєстрації. Будь ласка, перевірте свої дані та спробуйте знову.');
     }
   };

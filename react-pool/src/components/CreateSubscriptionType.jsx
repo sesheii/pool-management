@@ -31,7 +31,7 @@ const CreateSubscriptionType = () => {
       });
       setSubscriptionTypes(response.data);
     } catch (error) {
-      console.error('Помилка запиту:', error);
+      // console.error('Помилка запиту:', error);
     }
   };
 
