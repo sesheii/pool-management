@@ -48,7 +48,7 @@
 
 .user-card {
   width: 300px;
-  height: 190px;
+  height: auto;
   margin: 10px;
   padding: 20px;
   border-radius: 8px;
@@ -83,6 +83,9 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .delete-button:hover {
@@ -100,11 +103,15 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .details-button:hover {
   background-color: #388E3C;
 }
+
 
 .pagination {
   display: flex;

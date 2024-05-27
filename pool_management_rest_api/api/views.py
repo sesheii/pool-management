@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render
 from rest_framework.views import APIView
-from .models import PoolUser, Subscription, SubscriptionType
+from .models import Checkin, PoolUser, Subscription, SubscriptionType
 from .serializers import CheckinSerializer, PoolUserSerializer, SubscriptionSerializer, SubscriptionTypeSerializer
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
@@ -134,14 +134,12 @@ class UpdateSubscriptionView(APIView):
 
         subscription_type = get_object_or_404(SubscriptionType, id=subscription_type_id)
 
-        # Calculate the duration in days
         start_date_obj = datetime.strptime(start_date, '%Y-%m-%d').date()
         end_date_obj = datetime.strptime(end_date, '%Y-%m-%d').date()
         duration_days = (end_date_obj - start_date_obj).days
 
         price = subscription_type.daily_price * duration_days
 
-        # Update or create the subscription
         subscription, created = Subscription.objects.update_or_create(
             id=user.subscription.id if user.subscription else None,
             defaults={
@@ -152,9 +150,63 @@ class UpdateSubscriptionView(APIView):
             }
         )
 
-        # Assign the subscription to the user
         user.subscription = subscription
         user.save()
 
         serializer = SubscriptionSerializer(subscription)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class CheckedInUsersCount(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        checked_in_users_count = Checkin.objects.filter(checked_in=True).count()
+        return Response({'checked_in_users_count': checked_in_users_count})
+
+
+class CheckUserCheckinStatus(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        email = request.query_params.get('email', None)
+        if not email:
+            return Response({'error': 'Email is required'}, status=400)
+
+        try:
+            user = PoolUser.objects.get(email=email)
+        except PoolUser.DoesNotExist:
+            return Response({'error': 'User with this email does not exist'}, status=404)
+
+        try:
+            checkin_status = Checkin.objects.get(user=user).checked_in
+        except Checkin.DoesNotExist:
+            checkin_status = False
+
+        return Response({'email': email, 'checked_in': checkin_status})
+
+
+class ToggleUserCheckinStatus(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        email = request.data.get('email', None)
+        if not email:
+            return Response({'error': 'Email is required'}, status=400)
+
+        try:
+            user = PoolUser.objects.get(email=email)
+        except PoolUser.DoesNotExist:
+            return Response({'error': 'User with this email does not exist'}, status=404)
+
+        try:
+            checkin_instance = Checkin.objects.get(user=user)
+            checkin_instance.checked_in = not checkin_instance.checked_in
+            checkin_instance.save()
+        except Checkin.DoesNotExist:
+            Checkin.objects.create(user=user, checked_in=True)
+
+        return Response({'message': 'Checkin status updated successfully'})

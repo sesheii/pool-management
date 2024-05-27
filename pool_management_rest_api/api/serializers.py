@@ -25,4 +25,5 @@ class PoolUserSerializer(serializers.ModelSerializer):
 class CheckinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Checkin
-        fields = ['id', 'user', 'checkin_time', 'checkout_time']
+        fields = ['id', 'user']
+

@@ -26,5 +26,4 @@ class PoolUser(models.Model):
 
 class Checkin(models.Model):
     user = models.ForeignKey(PoolUser, on_delete=models.CASCADE)
-    checkin_time = models.DateTimeField()
-    checkout_time = models.DateTimeField(null=True)
+    checked_in = models.BooleanField(default=False)
