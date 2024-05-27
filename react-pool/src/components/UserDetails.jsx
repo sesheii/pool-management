@@ -17,6 +17,7 @@ const UserDetails = () => {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
   const [price, setPrice] = useState(0);
+  const [success, setSuccess] = useState(false); // Додано стан для успішного оновлення підписки
   const token = localStorage.getItem('access');
 
   useEffect(() => {
@@ -30,7 +31,6 @@ const UserDetails = () => {
 
         if (response.status === 200) {
           setUserData(response.data);
-          console.log(userData.subscription)
         } else {
           setError('Не вдалося завантажити дані користувача');
           setShowError(true);
@@ -84,6 +84,8 @@ const UserDetails = () => {
           ...prevData,
           subscription: response.data
         }));
+        setSuccess(true);
+        setTimeout(() => setSuccess(false), 5000);
       } else {
         setError('Не вдалося оновити підписку');
         setShowError(true);
@@ -128,6 +130,11 @@ const UserDetails = () => {
       {showError && (
         <div className="alert alert-danger" role="alert">
           {error}
+        </div>
+      )}
+      {success && ( // Відображення успішного оновлення підписки
+        <div className="alert alert-success" role="alert">
+          Підписка успішно оновлена!
         </div>
       )}
       <div className="Container4">

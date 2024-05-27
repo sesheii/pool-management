@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
@@ -31,17 +32,23 @@ const LoginForm = () => {
         localStorage.setItem("refresh", response.data.refresh);
         navigate('/home');
       } else {
-        console.error(response.data.message);
+        setError(response.data.message);
       }
     } catch (error) {
       console.error('Помилка запиту:', error);
+      setError('Невдала спроба входу. Будь ласка, перевірте свої дані та спробуйте знову.');
     }
     setUsername('');
     setPassword('');
   };
 
   return (
-    <div className="login-form-container">
+    <div className="login-form-container d-flex flex-column">
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="login-form">
         <h2>LOG IN</h2>
         <hr />
