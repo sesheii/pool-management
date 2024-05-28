@@ -52,6 +52,12 @@ const WebSocketComponent = () => {
       setAlertMessage('WebSocket connected!');
       setAlertType('success');
       setConnected(true);
+
+      newSocket.send(JSON.stringify({
+        username,
+        message: '',
+        element: 'connect_element',
+      }));
     });
 
     newSocket.addEventListener('message', ({ data }) => {
@@ -120,13 +126,19 @@ const WebSocketComponent = () => {
                   const messageClass = isCurrentUser ? 'message-right' : 'message-left';
                   return (
                     <div key={index} className="message-container">
-                      <div className={`message mb-3 p-2 ${messageClass}`}>
-                        <div className="message-header">
-                          <span className="username">{msg.username}</span>
-                          <span className="timestamp">{msg.timestamp}</span>
+                      {msg.element === 'connect_element' ? (
+                        <div className="connect-element text-center text-muted">
+                          User {msg.username} has joined the chat.
                         </div>
-                        <div className="message-text">{msg.message}</div>
-                      </div>
+                      ) : (
+                        <div className={`message mb-3 p-2 ${messageClass}`}>
+                          <div className="message-header">
+                            <span className="username">{msg.username}</span>
+                            <span className="timestamp">{msg.timestamp}</span>
+                          </div>
+                          <div className="message-text">{msg.message}</div>
+                        </div>
+                      )}
                     </div>
                   );
                 })}

@@ -36,7 +36,7 @@
 .message-right {
   background-color: #007bff;
   color: white;
-  text-align: right;
+  text-align: left;
   margin-left: auto; /* Align to the right */
 }
 
@@ -46,9 +46,9 @@
   margin-bottom: 5px;
 }
 
-.message-right .message-header {
-  flex-direction: row-reverse; /* Reverse the order for right-aligned messages */
-}
+/* .message-right .message-header {
+  flex-direction: row-reverse; Reverse the order for right-aligned messages
+} */
 
 .username {
   font-weight: bold;
@@ -69,4 +69,11 @@
 
 .message-text {
   margin-top: 5px;
+}
+
+.connect-element {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
