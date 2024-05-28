@@ -27,7 +27,7 @@ function App() {
             <Route path='/user-details/:email' element={<UserDetails/>} />
             <Route path='/createsub-scription-type' element={<CreateSubscriptionType/>} />
             <Route path='/register' element={<RegisterForm/>} />
-            <Route path='/web-socket' element={<WebSocket/>} />
+            <Route path='/chat' element={<WebSocket/>} />
           </Routes>
         </div>
       </div>

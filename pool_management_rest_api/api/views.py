@@ -11,6 +11,15 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.models import User, Group
 
 
+class GetUsernameView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({'username': user.username})
+
+
 class Home(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]

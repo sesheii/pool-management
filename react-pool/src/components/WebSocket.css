@@ -1,84 +1,72 @@
-.Container1 {
-  display: flex;
-  justify-content: center;
-  height: auto;
-  width: 100%;
-  border-radius: 8px;
-  background: transparent;
-  color: white;
+.message-area {
+  height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-.ContentContainer1 {
-  display: flex;
-  min-height: 86vh;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 50px;
-  width: 30%;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(45deg, #000000, #434343);
-}
-
-.alert {
-  margin-top: 20px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.alert-success {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.alert-danger {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.create-form .form-group {
-  margin-bottom: 20px;
-}
-
-.create-form .form-control {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
+.fixed-top-center {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
 }
 
 .message-container {
-  margin-top: 20px;
+  width: 100%;
 }
 
-.message-container ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.message-container li {
-  background-color: #f8f9fa;
-  margin-bottom: 10px;
+.message {
+  border-radius: 13px;
   padding: 10px;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  display: block;
+  width: fit-content;
+  max-width: 100%; /* Ensure the message bubble doesn't exceed the container width */
+  word-wrap: break-word; /* Wrap long words within the bubble */
+  white-space: pre-wrap; /* Preserve whitespace and ensure text wraps */
+  word-break: break-word; /* Break words if they exceed the bubble width */
 }
 
+.message-left {
+  background-color: #f1f1f1;
+  text-align: left;
+}
 
-.diggers {
-  color: #000000;
+.message-right {
+  background-color: #007bff;
+  color: white;
+  text-align: right;
+  margin-left: auto; /* Align to the right */
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.message-right .message-header {
+  flex-direction: row-reverse; /* Reverse the order for right-aligned messages */
+}
+
+.username {
+  font-weight: bold;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #888;
+  text-align: left;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.message-right .timestamp {
+  color: #e0e0e0; /* Lighter color for the timestamp in the right-aligned messages */
+  text-align: right;
+}
+
+.message-text {
+  margin-top: 5px;
 }

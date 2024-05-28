@@ -33,3 +33,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
 
 ###
 DELETE https://xl0322bk-8000.euw.devtunnels.ms/profile/Bobus/delete/
+
+###
+GET http://127.0.0.1:8000/api/get-username/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2ODUzMzU3LCJpYXQiOjE3MTY4NDk3NTcsImp0aSI6IjVjZjE4MGQzYTE2MTRhYTI5ZTM2NDY5NDI4YWJkNmE1IiwidXNlcl9pZCI6MX0.i4KNEE26QiGGVuORD13lrLlEEGoatfxQoh2RgwCJu1Q

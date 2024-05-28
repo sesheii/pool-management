@@ -18,8 +18,12 @@ const GlobalHeader = () => {
     navigate('/')
   }
 
-  const hangleHomeClick = () => {
+  const handleHomeClick = () => {
     navigate('/home')
+  }
+
+  const handleChatClick = () => {
+    navigate('/chat')
   }
 
   return (
@@ -30,10 +34,15 @@ const GlobalHeader = () => {
       <div className="header-right">
         <nav>
           <ul className="d-flex">
-
+            <li>
+              <button className="transparent-button1" onClick={handleChatClick}>
+                Chat
+              </button>
+            </li>
+            <div className="spacer1"></div>
             <li>
               {isLoggedIn && (
-                <button className="transparent-button1" onClick={hangleHomeClick}>
+                <button className="transparent-button1" onClick={handleHomeClick}>
                   Home
                 </button>
               )}

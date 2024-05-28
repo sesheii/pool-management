@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CheckUserCheckinStatus, CheckedInUsersCount, CreatePoolUser, CreateSubscriptionType, CreateUserView, DeletePoolUserByEmail, DeleteSubscriptionType, FilteredPoolUsersView, Home, AllPoolUsersView, ListSubscriptionTypes, ToggleUserCheckinStatus, UpdateSubscriptionView, UserDetailsView, UserGroupsView
+from .views import CheckUserCheckinStatus, CheckedInUsersCount, CreatePoolUser, CreateSubscriptionType, CreateUserView, DeletePoolUserByEmail, DeleteSubscriptionType, FilteredPoolUsersView, GetUsernameView, Home, AllPoolUsersView, ListSubscriptionTypes, ToggleUserCheckinStatus, UpdateSubscriptionView, UserDetailsView, UserGroupsView
 
 
 urlpatterns = [
@@ -18,6 +18,5 @@ urlpatterns = [
     path('toggle-check-in-status/', ToggleUserCheckinStatus.as_view(), name='toggle_check_in_status'),
     path('user-groups/', UserGroupsView.as_view(), name='user_groups'),
     path('create-user/', CreateUserView.as_view(), name='create_user'),
-
-
+    path('get-username/', GetUsernameView.as_view(), name='get_username'),
 ]
